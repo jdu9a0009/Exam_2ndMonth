@@ -1,0 +1,1438 @@
+definitions:
+  models.Branch:
+    properties:
+      address:
+        type: string
+      created_at:
+        type: string
+      id:
+        type: string
+      name:
+        type: string
+      phone:
+        type: string
+      updated_at:
+        type: string
+    type: object
+  models.Category:
+    properties:
+      created_at:
+        type: string
+      id:
+        type: string
+      name:
+        type: string
+      parent_id:
+        type: string
+      updated_at:
+        type: string
+    type: object
+  models.ComingTable:
+    properties:
+      branch_id:
+        type: string
+      coming_id:
+        type: string
+      created_at:
+        type: string
+      date_time:
+        type: string
+      id:
+        type: string
+      status:
+        $ref: '#/definitions/models.TableType'
+      updated_at:
+        type: string
+    type: object
+  models.ComingTableProduct:
+    properties:
+      barcode:
+        type: string
+      category_id:
+        type: string
+      coming_table_id:
+        type: string
+      count:
+        type: number
+      created_at:
+        type: string
+      id:
+        type: string
+      name:
+        type: string
+      price:
+        type: number
+      total_price:
+        type: number
+      updated_at:
+        type: string
+    type: object
+  models.CreateBranch:
+    properties:
+      address:
+        type: string
+      name:
+        type: string
+      phone:
+        type: string
+    type: object
+  models.CreateCategory:
+    properties:
+      name:
+        type: string
+      parent_id:
+        type: string
+    type: object
+  models.CreateComingTable:
+    properties:
+      branch_id:
+        type: string
+      coming_id:
+        type: string
+      date_time:
+        type: string
+    type: object
+  models.CreateComingTableProductSwagger:
+    properties:
+      barcode:
+        type: string
+      coming_table_id:
+        type: string
+      count:
+        type: number
+    type: object
+  models.CreateProduct:
+    properties:
+      barcode:
+        type: string
+      category_id:
+        type: string
+      name:
+        type: string
+      price:
+        type: number
+    type: object
+  models.GetAllBranchRequest:
+    properties:
+      limit:
+        type: integer
+      name:
+        type: string
+      page:
+        type: integer
+    type: object
+  models.GetAllCategoryRequest:
+    properties:
+      limit:
+        type: integer
+      name:
+        type: string
+      page:
+        type: integer
+    type: object
+  models.GetAllComingTableProductRequest:
+    properties:
+      barcode:
+        type: string
+      category_id:
+        type: string
+      limit:
+        type: integer
+      page:
+        type: integer
+    type: object
+  models.GetAllComingTableRequest:
+    properties:
+      branch_id:
+        type: string
+      coming_id:
+        type: string
+      limit:
+        type: integer
+      page:
+        type: integer
+    type: object
+  models.GetAllProductRequest:
+    properties:
+      barcode:
+        type: string
+      limit:
+        type: integer
+      name:
+        type: string
+      page:
+        type: integer
+    type: object
+  models.GetAllRemainRequest:
+    properties:
+      barcode:
+        type: string
+      branch_id:
+        type: string
+      category_id:
+        type: string
+      limit:
+        type: integer
+      page:
+        type: integer
+    type: object
+  models.Product:
+    properties:
+      barcode:
+        type: string
+      category_id:
+        type: string
+      created_at:
+        type: string
+      id:
+        type: string
+      name:
+        type: string
+      price:
+        type: number
+      updated_at:
+        type: string
+    type: object
+  models.Remain:
+    properties:
+      barcode:
+        type: string
+      branch_id:
+        type: string
+      category_id:
+        type: string
+      count:
+        type: number
+      created_at:
+        type: string
+      id:
+        type: string
+      name:
+        type: string
+      price:
+        type: number
+      total_price:
+        type: number
+      updated_at:
+        type: string
+    type: object
+  models.TableType:
+    enum:
+    - finishied
+    - in_process
+    type: string
+    x-enum-varnames:
+    - Finishied
+    - InProcess
+  models.UpdateBranch:
+    properties:
+      address:
+        type: string
+      id:
+        type: string
+      name:
+        type: string
+      phone:
+        type: string
+    type: object
+  models.UpdateCategory:
+    properties:
+      id:
+        type: string
+      name:
+        type: string
+      parent_id:
+        type: string
+    type: object
+  models.UpdateComingTable:
+    properties:
+      branch_id:
+        type: string
+      coming_id:
+        type: string
+      date_time:
+        type: string
+      id:
+        type: string
+    type: object
+  models.UpdateComingTableProduct:
+    properties:
+      barcode:
+        type: string
+      category_id:
+        type: string
+      coming_table_id:
+        type: string
+      count:
+        type: number
+      id:
+        type: string
+      name:
+        type: string
+      price:
+        type: number
+      total_price:
+        type: number
+    type: object
+  models.UpdateProduct:
+    properties:
+      barcode:
+        type: string
+      category_id:
+        type: string
+      id:
+        type: string
+      name:
+        type: string
+      price:
+        type: number
+    type: object
+  models.UpdateRemain:
+    properties:
+      barcode:
+        type: string
+      branch_id:
+        type: string
+      category_id:
+        type: string
+      count:
+        type: number
+      id:
+        type: string
+      name:
+        type: string
+      price:
+        type: number
+      total_price:
+        type: number
+    type: object
+  response.ErrorResp:
+    properties:
+      code:
+        type: string
+      message:
+        type: string
+    type: object
+info:
+  contact: {}
+paths:
+  /branch:
+    get:
+      consumes:
+      - application/json
+      description: get all branches based on limit, page and search by name
+      parameters:
+      - default: 10
+        description: limit
+        in: query
+        minimum: 1
+        name: limit
+        type: integer
+      - default: 1
+        description: page
+        in: query
+        minimum: 1
+        name: page
+        type: integer
+      - description: search
+        in: query
+        name: search
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/models.GetAllBranchRequest'
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/response.ErrorResp'
+        "404":
+          description: Not Found
+          schema:
+            $ref: '#/definitions/response.ErrorResp'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/response.ErrorResp'
+      summary: GET  ALL BRANCHES
+      tags:
+      - BRANCH
+    post:
+      consumes:
+      - application/json
+      description: CREATES BRANCH BASED ON GIVEN DATA
+      parameters:
+      - description: branch data
+        in: body
+        name: data
+        required: true
+        schema:
+          $ref: '#/definitions/models.CreateBranch'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            type: string
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/response.ErrorResp'
+        "404":
+          description: Not Found
+          schema:
+            $ref: '#/definitions/response.ErrorResp'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/response.ErrorResp'
+      summary: CREATES BRANCH
+      tags:
+      - BRANCH
+  /branch/{id}:
+    delete:
+      consumes:
+      - application/json
+      description: DELETES BRANCH BASED ON ID
+      parameters:
+      - description: id of branch
+        format: uuid
+        in: path
+        name: id
+        required: true
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            type: string
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/response.ErrorResp'
+        "404":
+          description: Not Found
+          schema:
+            $ref: '#/definitions/response.ErrorResp'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/response.ErrorResp'
+      summary: DELETE BRANCH BY ID
+      tags:
+      - BRANCH
+    get:
+      consumes:
+      - application/json
+      description: get branch by ID
+      parameters:
+      - description: Branch ID
+        format: uuid
+        in: path
+        name: id
+        required: true
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/models.Branch'
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/response.ErrorResp'
+        "404":
+          description: Not Found
+          schema:
+            $ref: '#/definitions/response.ErrorResp'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/response.ErrorResp'
+      summary: GET BY ID
+      tags:
+      - BRANCH
+    put:
+      consumes:
+      - application/json
+      description: UPDATES BRANCH BASED ON GIVEN DATA AND ID
+      parameters:
+      - description: id of branch
+        format: uuid
+        in: path
+        name: id
+        required: true
+        type: string
+      - description: branch data
+        in: body
+        name: data
+        required: true
+        schema:
+          $ref: '#/definitions/models.UpdateBranch'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            type: string
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/response.ErrorResp'
+        "404":
+          description: Not Found
+          schema:
+            $ref: '#/definitions/response.ErrorResp'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/response.ErrorResp'
+      summary: UPDATE BRANCH BY ID
+      tags:
+      - BRANCH
+  /category:
+    get:
+      consumes:
+      - application/json
+      description: get all categories based on limit, page and search by name
+      parameters:
+      - default: 10
+        description: limit
+        in: query
+        minimum: 1
+        name: limit
+        type: integer
+      - default: 1
+        description: page
+        in: query
+        minimum: 1
+        name: page
+        type: integer
+      - description: search
+        in: query
+        name: search
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/models.GetAllCategoryRequest'
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/response.ErrorResp'
+        "404":
+          description: Not Found
+          schema:
+            $ref: '#/definitions/response.ErrorResp'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/response.ErrorResp'
+      summary: GET  ALL CATEGORIES
+      tags:
+      - category
+    post:
+      consumes:
+      - application/json
+      description: CREATES Category BASED ON GIVEN DATA
+      parameters:
+      - description: Category data
+        in: body
+        name: data
+        required: true
+        schema:
+          $ref: '#/definitions/models.CreateCategory'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            type: string
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/response.ErrorResp'
+        "404":
+          description: Not Found
+          schema:
+            $ref: '#/definitions/response.ErrorResp'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/response.ErrorResp'
+      summary: CREATES Category
+      tags:
+      - category
+  /category/{id}:
+    delete:
+      consumes:
+      - application/json
+      description: DELETES CATEGORY BASED ON ID
+      parameters:
+      - description: id of category
+        format: uuid
+        in: path
+        name: id
+        required: true
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            type: string
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/response.ErrorResp'
+        "404":
+          description: Not Found
+          schema:
+            $ref: '#/definitions/response.ErrorResp'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/response.ErrorResp'
+      summary: DELETE CATEGORY BY ID
+      tags:
+      - category
+    get:
+      consumes:
+      - application/json
+      description: get category by ID
+      parameters:
+      - description: Category ID
+        format: uuid
+        in: path
+        name: id
+        required: true
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/models.Category'
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/response.ErrorResp'
+        "404":
+          description: Not Found
+          schema:
+            $ref: '#/definitions/response.ErrorResp'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/response.ErrorResp'
+      summary: GET BY ID
+      tags:
+      - category
+    put:
+      consumes:
+      - application/json
+      description: UPDATES Category BASED ON GIVEN DATA AND ID
+      parameters:
+      - description: id of category
+        format: uuid
+        in: path
+        name: id
+        required: true
+        type: string
+      - description: category data
+        in: body
+        name: data
+        required: true
+        schema:
+          $ref: '#/definitions/models.UpdateCategory'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            type: string
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/response.ErrorResp'
+        "404":
+          description: Not Found
+          schema:
+            $ref: '#/definitions/response.ErrorResp'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/response.ErrorResp'
+      summary: UPDATE Category BY ID
+      tags:
+      - category
+  /coming_table:
+    get:
+      consumes:
+      - application/json
+      description: gets all Coming_Table based on limit, page and search by name
+      parameters:
+      - default: 10
+        description: limit
+        in: query
+        minimum: 1
+        name: limit
+        type: integer
+      - default: 1
+        description: page
+        in: query
+        minimum: 1
+        name: page
+        type: integer
+      - description: coming_id
+        in: query
+        name: coming_id
+        type: string
+      - description: branch_id
+        in: query
+        name: branch_id
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/models.GetAllComingTableRequest'
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/response.ErrorResp'
+        "404":
+          description: Not Found
+          schema:
+            $ref: '#/definitions/response.ErrorResp'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/response.ErrorResp'
+      summary: LIST Coming_Table
+      tags:
+      - coming_table
+    post:
+      consumes:
+      - application/json
+      description: add ComingTable data to db based on given info in body
+      parameters:
+      - description: ComingTable data
+        in: body
+        name: data
+        required: true
+        schema:
+          $ref: '#/definitions/models.CreateComingTable'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            type: string
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/response.ErrorResp'
+        "404":
+          description: Not Found
+          schema:
+            $ref: '#/definitions/response.ErrorResp'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/response.ErrorResp'
+      summary: CREATE ComingTable
+      tags:
+      - coming_table
+  /coming_table/{id}:
+    delete:
+      consumes:
+      - application/json
+      description: deletes ComingTable by id
+      parameters:
+      - description: id of ComingTable
+        format: uuid
+        in: path
+        name: id
+        required: true
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            type: string
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/response.ErrorResp'
+        "404":
+          description: Not Found
+          schema:
+            $ref: '#/definitions/response.ErrorResp'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/response.ErrorResp'
+      summary: DELETE ComingTable BY ID
+      tags:
+      - coming_table
+    get:
+      consumes:
+      - application/json
+      description: gets ComingTable by ID
+      parameters:
+      - description: ComingTable ID
+        format: uuid
+        in: path
+        name: id
+        required: true
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/models.ComingTable'
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/response.ErrorResp'
+        "404":
+          description: Not Found
+          schema:
+            $ref: '#/definitions/response.ErrorResp'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/response.ErrorResp'
+      summary: GET BY ID
+      tags:
+      - coming_table
+    put:
+      consumes:
+      - application/json
+      description: UPDATES COMINGTABLE BASED ON GIVEN DATA AND ID
+      parameters:
+      - description: id of ComingTable
+        format: uuid
+        in: path
+        name: id
+        required: true
+        type: string
+      - description: ComingTable data
+        in: body
+        name: data
+        required: true
+        schema:
+          $ref: '#/definitions/models.UpdateComingTable'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            type: string
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/response.ErrorResp'
+        "404":
+          description: Not Found
+          schema:
+            $ref: '#/definitions/response.ErrorResp'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/response.ErrorResp'
+      summary: UPDATE COMINGTABLE
+      tags:
+      - coming_table
+  /coming_table_product:
+    get:
+      consumes:
+      - application/json
+      description: gets all Coming_TableProduct based on limit, page and search by
+        name
+      parameters:
+      - default: 10
+        description: limit
+        in: query
+        minimum: 1
+        name: limit
+        type: integer
+      - default: 1
+        description: page
+        in: query
+        minimum: 1
+        name: page
+        type: integer
+      - description: category_id
+        in: query
+        name: category_id
+        type: string
+      - description: barcode
+        in: query
+        name: barcode
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/models.GetAllComingTableProductRequest'
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/response.ErrorResp'
+        "404":
+          description: Not Found
+          schema:
+            $ref: '#/definitions/response.ErrorResp'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/response.ErrorResp'
+      summary: LIST Coming_Table_Product
+      tags:
+      - coming_table_product
+    post:
+      consumes:
+      - application/json
+      description: add ComingTableProduct data to db based on given info in body
+      parameters:
+      - description: ComingTableProduct data
+        in: body
+        name: data
+        required: true
+        schema:
+          $ref: '#/definitions/models.CreateComingTableProductSwagger'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            type: string
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/response.ErrorResp'
+        "404":
+          description: Not Found
+          schema:
+            $ref: '#/definitions/response.ErrorResp'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/response.ErrorResp'
+      summary: CREATE ComingTableProduct
+      tags:
+      - coming_table_product
+  /coming_table_product/{id}:
+    delete:
+      consumes:
+      - application/json
+      description: deletes ComingTableProduct by id
+      parameters:
+      - description: id of ComingTableProduct
+        format: uuid
+        in: path
+        name: id
+        required: true
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            type: string
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/response.ErrorResp'
+        "404":
+          description: Not Found
+          schema:
+            $ref: '#/definitions/response.ErrorResp'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/response.ErrorResp'
+      summary: DELETE ComingTableProduct BY ID
+      tags:
+      - coming_table_product
+    get:
+      consumes:
+      - application/json
+      description: gets ComingTableProduct by ID
+      parameters:
+      - description: ComingTableProduct ID
+        format: uuid
+        in: path
+        name: id
+        required: true
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/models.ComingTableProduct'
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/response.ErrorResp'
+        "404":
+          description: Not Found
+          schema:
+            $ref: '#/definitions/response.ErrorResp'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/response.ErrorResp'
+      summary: GET BY ID
+      tags:
+      - coming_table_product
+    put:
+      consumes:
+      - application/json
+      description: UPDATES COMINGTableProduct BASED ON GIVEN DATA AND ID
+      parameters:
+      - description: id of ComingTableProduct
+        format: uuid
+        in: path
+        name: id
+        required: true
+        type: string
+      - description: ComingTableProduct data
+        in: body
+        name: data
+        required: true
+        schema:
+          $ref: '#/definitions/models.UpdateComingTableProduct'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            type: string
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/response.ErrorResp'
+        "404":
+          description: Not Found
+          schema:
+            $ref: '#/definitions/response.ErrorResp'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/response.ErrorResp'
+      summary: UPDATE COMINGTableProduct
+      tags:
+      - coming_table_product
+  /do_income/{coming_table_id}:
+    post:
+      consumes:
+      - application/json
+      description: adds Remain data to db based on given id
+      parameters:
+      - description: Coming Table ID
+        in: path
+        name: coming_table_id
+        required: true
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            type: string
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/response.ErrorResp'
+        "404":
+          description: Not Found
+          schema:
+            $ref: '#/definitions/response.ErrorResp'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/response.ErrorResp'
+      summary: CREATE Remain
+      tags:
+      - remain
+  /product:
+    get:
+      consumes:
+      - application/json
+      description: gets all product based on limit, page and search by name
+      parameters:
+      - default: 10
+        description: limit
+        in: query
+        minimum: 1
+        name: limit
+        type: integer
+      - default: 1
+        description: page
+        in: query
+        minimum: 1
+        name: page
+        type: integer
+      - description: name
+        in: query
+        name: name
+        type: string
+      - description: barcode
+        in: query
+        name: barcode
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/models.GetAllProductRequest'
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/response.ErrorResp'
+        "404":
+          description: Not Found
+          schema:
+            $ref: '#/definitions/response.ErrorResp'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/response.ErrorResp'
+      summary: LIST PRODUCT
+      tags:
+      - product
+    post:
+      consumes:
+      - application/json
+      description: adds product data to db based on given info in body
+      parameters:
+      - description: product data
+        in: body
+        name: data
+        required: true
+        schema:
+          $ref: '#/definitions/models.CreateProduct'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            type: string
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/response.ErrorResp'
+        "404":
+          description: Not Found
+          schema:
+            $ref: '#/definitions/response.ErrorResp'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/response.ErrorResp'
+      summary: CREATE PRODUCT
+      tags:
+      - product
+  /product/{id}:
+    delete:
+      consumes:
+      - application/json
+      description: deletes product by id
+      parameters:
+      - description: id of product
+        format: uuid
+        in: path
+        name: id
+        required: true
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            type: string
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/response.ErrorResp'
+        "404":
+          description: Not Found
+          schema:
+            $ref: '#/definitions/response.ErrorResp'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/response.ErrorResp'
+      summary: DELETE PRODUCT BY ID
+      tags:
+      - product
+    get:
+      consumes:
+      - application/json
+      description: gets product by ID
+      parameters:
+      - description: Product ID
+        format: uuid
+        in: path
+        name: id
+        required: true
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/models.Product'
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/response.ErrorResp'
+        "404":
+          description: Not Found
+          schema:
+            $ref: '#/definitions/response.ErrorResp'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/response.ErrorResp'
+      summary: GET BY ID
+      tags:
+      - product
+    put:
+      consumes:
+      - application/json
+      description: UPDATES PRODUCT BASED ON GIVEN DATA AND ID
+      parameters:
+      - description: id of product
+        format: uuid
+        in: path
+        name: id
+        required: true
+        type: string
+      - description: product data
+        in: body
+        name: data
+        required: true
+        schema:
+          $ref: '#/definitions/models.UpdateProduct'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            type: string
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/response.ErrorResp'
+        "404":
+          description: Not Found
+          schema:
+            $ref: '#/definitions/response.ErrorResp'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/response.ErrorResp'
+      summary: UPDATE PRODUCT
+      tags:
+      - product
+  /remain:
+    get:
+      consumes:
+      - application/json
+      description: gets all Remain based on limit, page and search by name
+      parameters:
+      - default: 10
+        description: limit
+        in: query
+        minimum: 1
+        name: limit
+        type: integer
+      - default: 1
+        description: page
+        in: query
+        minimum: 1
+        name: page
+        type: integer
+      - description: branch_id
+        in: query
+        name: branch_id
+        type: string
+      - description: category_id
+        in: query
+        name: category_id
+        type: string
+      - description: barcode
+        in: query
+        name: barcode
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/models.GetAllRemainRequest'
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/response.ErrorResp'
+        "404":
+          description: Not Found
+          schema:
+            $ref: '#/definitions/response.ErrorResp'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/response.ErrorResp'
+      summary: LIST Remain
+      tags:
+      - remain
+  /remain/{id}:
+    delete:
+      consumes:
+      - application/json
+      description: deletes Remain by id
+      parameters:
+      - description: id of Remain
+        format: uuid
+        in: path
+        name: id
+        required: true
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            type: string
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/response.ErrorResp'
+        "404":
+          description: Not Found
+          schema:
+            $ref: '#/definitions/response.ErrorResp'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/response.ErrorResp'
+      summary: DELETE Remain BY ID
+      tags:
+      - remain
+    get:
+      consumes:
+      - application/json
+      description: gets Remain by ID
+      parameters:
+      - description: Remain ID
+        format: uuid
+        in: path
+        name: id
+        required: true
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/models.Remain'
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/response.ErrorResp'
+        "404":
+          description: Not Found
+          schema:
+            $ref: '#/definitions/response.ErrorResp'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/response.ErrorResp'
+      summary: GET BY ID
+      tags:
+      - remain
+    put:
+      consumes:
+      - application/json
+      description: UPDATES Remain BASED ON GIVEN DATA AND ID
+      parameters:
+      - description: id of Remain
+        format: uuid
+        in: path
+        name: id
+        required: true
+        type: string
+      - description: Remain data
+        in: body
+        name: data
+        required: true
+        schema:
+          $ref: '#/definitions/models.UpdateRemain'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            type: string
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/response.ErrorResp'
+        "404":
+          description: Not Found
+          schema:
+            $ref: '#/definitions/response.ErrorResp'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/response.ErrorResp'
+      summary: UPDATE Remain
+      tags:
+      - remain
+swagger: "2.0"
